@@ -10,8 +10,7 @@
     <relativePath/>
   </parent>
 
-  <groupId>dev.appsody</groupId>
-  <artifactId>default-application</artifactId>
+  <artifactId>auth-application</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
