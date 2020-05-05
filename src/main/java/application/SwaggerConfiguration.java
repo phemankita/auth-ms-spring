@@ -26,8 +26,8 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiEndPointsInfo() {
 
-        return new ApiInfoBuilder().title("Inventory REST API")
-                .description("Stores all the inventory antique computing devices")
+        return new ApiInfoBuilder().title("Auth REST API")
+                .description("Authentication and Authorization")
                 .build();
     }
 
