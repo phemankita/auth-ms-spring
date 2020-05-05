@@ -90,7 +90,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     .authorizedGrantTypes(
                             "refresh_token",
                             "password")
-                    .scopes("blue").and()
+                    .scopes("blue", "admin").and()
 				// mobile bff -- implicit grant type
 				.withClient("bluecomputemobile")
                     .secret(passwordEncoder.encode("bluecomputemobiles3cret"))
