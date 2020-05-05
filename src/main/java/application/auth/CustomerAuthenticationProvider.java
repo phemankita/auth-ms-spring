@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,12 +24,13 @@ public class CustomerAuthenticationProvider implements AuthenticationProvider {
 
     private static Logger logger =  LoggerFactory.getLogger(CustomerAuthenticationProvider.class);
     
+    @Value( "${customerService.url}" )
+	private String custResourceUrl;
+    
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
-         
-		logger.debug("authenticating: " + name );
 		
 		if (name.equals("user") && password.equals("password")) {
 			// TEST
@@ -36,7 +38,8 @@ public class CustomerAuthenticationProvider implements AuthenticationProvider {
 		}
 		
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Customer[]> responseEntity = restTemplate.getForEntity("http://docker.for.mac.localhost:8083/micro/customer/search?username={name}", Customer[].class, name);
+		ResponseEntity<Customer[]> responseEntity = restTemplate.getForEntity(custResourceUrl+"?username={name}", Customer[].class, name);
+
 		Customer[] customer_array = responseEntity.getBody();
         
 		final List<Customer> custList= new ArrayList<Customer>();
